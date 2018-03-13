@@ -1,8 +1,16 @@
 package org.yakhya.spring.cloud.bookservice;
 
+
+import io.swagger.annotations.ApiModelProperty;
+
 public class Book {
+  @ApiModelProperty(notes = "The database generated book ID")
   private Long id;
+
+  @ApiModelProperty(notes = "The book author")
   private String author;
+
+  @ApiModelProperty(notes = "The book title")
   private String title;
 
   public Book(Long id, String title, String author) {
