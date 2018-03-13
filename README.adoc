@@ -1,0 +1,9 @@
+== Spring Clound
+
+
+=== Spring cloud
+http://www.baeldung.com/spring-cloud-bootstrapping
+
+
+=== Swagger
+https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger
