@@ -19,7 +19,7 @@ import java.util.List;
 @SpringBootApplication
 @EnableEurekaClient
 @RestController
-@Api(value="onlinestore", description="Operations pertaining to products in Online Store")
+@Api(value="onlinestore", description="Operations pertaining to books in Online Store")
 @RequestMapping("/books")
 public class BookServiceApplication {
   public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class BookServiceApplication {
     return bookList;
   }
 
-  @ApiOperation(value = "Get a book")
+  @ApiOperation(value = "Search a book with an ID",response = Book.class)
   @GetMapping("/{bookId}")
   public Book findBook(@PathVariable Long bookId) {
     return bookList.stream().filter(b -> b.getId().equals(bookId)).findFirst().orElse(null);
