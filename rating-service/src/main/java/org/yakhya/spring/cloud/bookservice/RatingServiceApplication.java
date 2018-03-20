@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,11 +37,21 @@ public class RatingServiceApplication {
       new Rating(4L, 2L, 5)
   );
 
-  @GetMapping("")
-  public List<Rating> findRatingsByBookId(@RequestParam Long bookId) {
+  @ApiOperation(value = "Search ratings with an ID",response = Iterable.class)
+  @GetMapping("/{bookId}")
+  public List<Rating> findRatingsByBookId(@PathVariable Long bookId) {
     return bookId == null || bookId.equals(0L) ? Collections.EMPTY_LIST : ratingList.stream().filter(r -> r.getBookId().equals(bookId)).collect(Collectors.toList());
   }
 
+
+  @ApiOperation(value = "View a list of available books", response = Iterable.class)
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Successfully retrieved list"),
+      @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+      @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+      @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+  }
+  )
   @GetMapping("/all")
   public List<Rating> findAllRatings() {
     return ratingList;
